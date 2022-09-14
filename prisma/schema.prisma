@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Search {
+  id          Int         @id @default(autoincrement())
+  flight      String?
+  adults      String?
+  class       String?
+  destination String?
+  origin      String?
+  notification Boolean
+  stop Boolean
+  dateFrom    String
+  dateTo      String
+  min_miles   String?
+  notified    Boolean?  @default(true)
+  expired     Boolean?    @default(false)
+  BestPrice   BestPrice[]
+}
+
+model BestPrice {
+  id            Int      @id @default(autoincrement())
+  notified      Boolean? @default(false)
+  bestMiles     Int?
+  bestMilesdate String?
+  airline String
+  duration String
+  stop Int
+    expired     Boolean?    @default(false)
+  search        Search   @relation(fields: [searchId], references: [id], onDelete: Cascade)
+  searchId      Int
+}
