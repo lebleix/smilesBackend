@@ -57,7 +57,7 @@ export class SmilesService {
    }
  
    async  SearchSave(smile: SearchSmileDto) {
-   
+    await await this.prisma.bestPrice.deleteMany();
     console.log("class",smile.class.toUpperCase());
      
     let arr = [];

@@ -121,6 +121,7 @@ export class MilesService {
 
 
   async  SearchSave(smile: SearchMileDto) {
+    await await this.prisma.bestPrice.deleteMany();
     console.log("class",smile.class.toUpperCase());
      
     let arr = [];
